@@ -6,29 +6,46 @@ public class PlayerController : MonoBehaviour
 {
     public float horizontalInput;
     public float speed = 25.0f;
-    public float verticalInput;
+    public float xRange = 23.0f;
+    public float zRange = 25.0f;
+
+    public GameObject projectilePrefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < -15)
-            {
-            transform.position = new Vector3(-15, transform.position.y, transform.position.x);
-            }
-        if (transform.position.x > 15)
+        //X-Range
+        if (transform.position.x < -xRange)
         {
-            transform.position = new Vector3(15, transform.position.y, transform.position.x);
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
         }
-
+        if (transform.position.x > xRange)
+        {
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+        }
+        //Z-Range
+        if (transform.position.z < -zRange)
+        {
+            transform.position = new Vector3 (transform.position.x, transform.position.y, -zRange);
+        }
+        if (transform.position.z > zRange)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
+        }
+        // Check Spacebar
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            //When space is pressed down run code
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        }
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * Time.deltaTime * horizontalInput * speed);
-        verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.forward * Time.deltaTime * verticalInput * speed);
+
     }
 }
