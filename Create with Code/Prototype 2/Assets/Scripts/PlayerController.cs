@@ -29,19 +29,10 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
         }
-        //Z-Range
-        if (transform.position.z < -zRange)
-        {
-            transform.position = new Vector3 (transform.position.x, transform.position.y, -zRange);
-        }
-        if (transform.position.z > zRange)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, zRange);
-        }
         // Check Spacebar
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            //When space is pressed down run code
+            //When space is pressed down run code and FIRE FOOD!
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         }
         horizontalInput = Input.GetAxis("Horizontal");
