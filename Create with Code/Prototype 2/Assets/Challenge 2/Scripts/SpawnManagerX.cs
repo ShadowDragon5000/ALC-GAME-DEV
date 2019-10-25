@@ -11,22 +11,38 @@ public class SpawnManagerX : MonoBehaviour
     private float spawnPosY = 30;
 
     private float startDelay = 1.0f;
-    private float spawnInterval = 5.0f-3.0f;
+    private float spawnInterval = 3.0f;
+    private float nextBall;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnRandomBall", startDelay, spawnInterval);
+        //Invoke("SpawnRandomBall", Random.Range(1.0f, 3.0f));
+
     }
 
-    // Spawn random ball at random x position at top of play area
-    void SpawnRandomBall ()
+    //Update is called once per frame
+    private void Update()
     {
-        // Generate random ball index and random spawn position
-        Vector3 spawnPos = new Vector3(Random.Range(spawnLimitXLeft, spawnLimitXRight), 30, 0);
-        int ballIndex = Random.Range(0, ballPrefabs.Length);
-        // instantiate ball at random spawn location
-        Instantiate(ballPrefabs[ballIndex], spawnPos, ballPrefabs[ballIndex].transform.rotation);
-    }
+        if (Time.time > nextBall)
+        {
+            nextBall += Random.Range(3.0f, 5.0f);
+            // Generate random ball index and random spawn position
+            Vector3 spawnPos = new Vector3(Random.Range(spawnLimitXLeft, spawnLimitXRight), 30, 0);
+            int ballIndex = Random.Range(0, ballPrefabs.Length);
+            // instantiate ball at random spawn location
+            Instantiate(ballPrefabs[ballIndex], spawnPos, ballPrefabs[ballIndex].transform.rotation);
+        }
 
+        // Spawn random ball at random x position at top of play area
+        //void SpawnRandomBall () 
+        {
+            // Generate random ball index and random spawn position
+            //Vector3 spawnPos = new Vector3(Random.Range(spawnLimitXLeft, spawnLimitXRight), 30, 0);
+            //int ballIndex = Random.Range(0, ballPrefabs.Length);
+            // instantiate ball at random spawn location
+            //Instantiate(ballPrefabs[ballIndex], spawnPos, ballPrefabs[ballIndex].transform.rotation);
+        }
+
+    }
 }
