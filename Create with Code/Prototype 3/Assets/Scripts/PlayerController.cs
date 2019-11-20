@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
-    public float jumpForce;
-    public float gravityModifier;
-    public bool isOnGround = true;
-    public bool gameOver = false;
     private Animator playerAnim;
     public ParticleSystem explosionParticle;
     public ParticleSystem dirtParticle;
     public AudioClip jumpSound;
     public AudioClip crashSound;
     private AudioSource playerAudio;
+    public float jumpForce;
+    public float gravityModifier;
+    public bool isOnGround = true;
+    public bool gameOver = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
             dirtParticle.Play();
+            Debug.Log("Dirt Particle is playing");
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
