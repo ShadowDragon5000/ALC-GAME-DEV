@@ -15,7 +15,7 @@ public class PlayerControllerX : MonoBehaviour
     public AudioClip moneySound;
     public AudioClip explodeSound;
     public bool isLowEnough;
-    private float topBound = 17.0f;
+    private float topBound = 15.0f;
 
 
     // Start is called before the first frame update
@@ -34,12 +34,22 @@ public class PlayerControllerX : MonoBehaviour
     void Update()
     {
         // While space is pressed and player is low enough, float up
-        if (Input.GetKey(KeyCode.Space) && isLowEnough == true &&!gameOver )
+        if (transform.position.y > topBound)
+        {
+            isLowEnough = false;
+            transform.position = new Vector3(transform.position.x, topBound, transform.position.z);
+            playerRb.velocity = new Vector3(0, 0, 0);
+        }
+        else if(transform.position.y < topBound)
+        {
+            isLowEnough = true;
+        }
+        if (Input.GetKey(KeyCode.Space) && isLowEnough == true && !gameOver) 
         {
             playerRb.AddForce(Vector3.up * floatForce, ForceMode.Impulse);
         }
-        if (transform.position.y > topBound)
-            isLowEnough = false;
+        //if (transform.position.y > topBound)
+            //isLowEnough = false;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -62,7 +72,11 @@ public class PlayerControllerX : MonoBehaviour
             Destroy(other.gameObject);
 
         }
-
+        // if the player collides with ground, jump
+        else if (other.gameObject.CompareTag("Ground") && !gameOver)
+        {
+            playerRb.AddForce(Vector3.up * 15, ForceMode.Impulse);
+        }
         
 
     }
