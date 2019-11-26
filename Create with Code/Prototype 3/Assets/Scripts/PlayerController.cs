@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
             dirtParticle.Play();
-            Debug.Log("Dirt Particle is playing");
+            //Debug.Log("Dirt Particle is playing");
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
