@@ -14,7 +14,7 @@ public class gm : MonoBehaviour
     {
         { StartCoroutine(SpawnTarget()); }
         score = 0;
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Score: " + score; //UpdateScore(0);
     }
 
     // Update is called once per frame
